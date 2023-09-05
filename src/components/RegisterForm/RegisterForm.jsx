@@ -28,8 +28,14 @@ export const RegisterForm = () => {
         email: email.value,
         password: password.value,
       })
+    ).then((response) => {
+      if (response?.error?.message) {
+        return alert(`Email or password is incorrect`);
+      }
+
+      form.reset();
+    },
     );
-    form.reset();
   };
 
   return (

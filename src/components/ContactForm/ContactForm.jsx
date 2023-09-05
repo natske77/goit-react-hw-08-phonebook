@@ -15,7 +15,7 @@ export function ContactForm() {
   const { contactsItem } = useSelector(getContacts);
   const dispatch = useDispatch();
 
-  const handleSubmit = evt => {
+ const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
     const { name, number } = form.elements;
@@ -25,12 +25,12 @@ export function ContactForm() {
       name: name.value,
       number: number.value,
     };
-    if (contactsItem.some(contact => contact.name === name.value)) {
+    if (contactsItem.some(contact => contact.name.toLowerCase() === name.value.toLowerCase())) {
       getNotification(`${name.value} is already in contacts.`);
     } else {
       dispatch(addContact(newContact));
+      form.reset();
     }
-    form.reset();
   };
 
   return (

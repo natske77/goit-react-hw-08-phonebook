@@ -25,11 +25,19 @@ export const LoginForm = () => {
     }
   };
 
-  const handleSubmit = evt => {
+const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+    dispatch(logIn({ email, password }))
+      .then((response) => {
+          if (response?.error?.message) {
+            return alert(`Email or password is incorrect`);
+          }
+
+          setEmail('');
+          setPassword('');
+        },
+      );
+
   };
 
   return (
